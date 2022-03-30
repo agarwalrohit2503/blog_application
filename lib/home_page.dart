@@ -14,7 +14,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isUserLoggedIn = Provider.of<bool>(context);
     final blogPosts = Provider.of<List<BlogPost>>(context);
     final user = Provider.of<BlogUser>(context);
     return BlogScaffold(
@@ -22,7 +21,7 @@ class HomePage extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              if (isUserLoggedIn) {
+              if (user.isLoaggedIn) {
                 FirebaseAuth.instance.signOut();
               } else {
                 showDialog(
@@ -33,11 +32,12 @@ class HomePage extends StatelessWidget {
                 );
               }
             },
-            child: isUserLoggedIn ? const Text("Logout") : const Text("Login"),
+            child:
+                user.isLoaggedIn ? const Text("Logout") : const Text("Login"),
           )
         ],
       ),
-      floatingActionButton: isUserLoggedIn
+      floatingActionButton: user.isLoaggedIn
           ? FloatingActionButton.extended(
               onPressed: () {
                 Navigator.of(context).push(

@@ -6,6 +6,7 @@ class BlogPost {
   final String title;
   final String body;
   final DateTime publishedDate;
+  final bool isLiked;
 
   String get formattedDate => DateFormat('MMMM d, y').format(publishedDate);
 
@@ -14,6 +15,7 @@ class BlogPost {
     required this.title,
     required this.publishedDate,
     required this.body,
+    this.isLiked = false,
   });
 
   factory BlogPost.fromJson(DocumentSnapshot blog) {
@@ -24,6 +26,7 @@ class BlogPost {
       title: map['title'] ?? "",
       publishedDate: map['published_date'].toDate(),
       body: map['body'] ?? "",
+      isLiked: map['is_liked'] ?? false,
     );
   }
 

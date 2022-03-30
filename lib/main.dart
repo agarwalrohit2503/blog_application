@@ -43,18 +43,24 @@ class MyApp extends StatelessWidget {
           initialData: const [],
           lazy: true,
         ),
-        StreamProvider<bool>(
-          create: (context) => FirebaseAuth.instance
-              .authStateChanges()
-              .map((user) => user != null),
-          initialData: false,
+        StreamProvider<User?>(
+          create: (context) => FirebaseAuth.instance.authStateChanges(),
+          initialData: null,
         ),
-        Provider<BlogUser>(
+        ProxyProvider<User?, BlogUser>(
           create: (context) => BlogUser(
             profilePicture:
                 "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
             name: "Rohit Agarwal",
+            isLoaggedIn: false,
           ),
+          update: (context, User? firebaseUser, blogUser) {
+            return BlogUser(
+              profilePicture: blogUser!.profilePicture,
+              name: blogUser.name,
+              isLoaggedIn: firebaseUser != null,
+            );
+          },
         ),
         Provider<ThemeData>(create: (context) => theme),
       ],
