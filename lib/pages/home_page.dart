@@ -21,6 +21,12 @@ class HomePage extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
+              Navigator.of(context).pushNamed('/store');
+            },
+            child: const Text("Store"),
+          ),
+          TextButton(
+            onPressed: () {
               if (user.isLoaggedIn) {
                 FirebaseAuth.instance.signOut();
               } else {

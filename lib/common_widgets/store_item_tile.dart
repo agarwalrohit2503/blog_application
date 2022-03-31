@@ -1,4 +1,7 @@
+import 'package:blog_application/models/cart_notifier.dart';
 import 'package:blog_application/models/store_item.dart';
+
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class StoreItemTile extends StatelessWidget {
@@ -8,6 +11,7 @@ class StoreItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('item card rebuild');
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -41,9 +45,19 @@ class StoreItemTile extends StatelessWidget {
                 "\$${item.price}",
                 textScaleFactor: 0.8,
               ),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text("Add to Cart"),
+              Consumer<CartNotifier>(
+                builder: (context, value, child) {
+                  final _cart = Provider.of<CartNotifier>(context);
+                  return _cart.isInCart(item)
+                      ? const ElevatedButton(
+                          onPressed: null,
+                          child: Text("Added"),
+                        )
+                      : ElevatedButton(
+                          onPressed: () => _cart.add(item),
+                          child: const Text("Add to Cart"),
+                        );
+                },
               )
             ],
           )

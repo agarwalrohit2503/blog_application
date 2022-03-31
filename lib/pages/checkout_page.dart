@@ -17,25 +17,54 @@ class CheckoutPage extends StatelessWidget {
         ),
       ),
       children: [
-        ListView.builder(
-          itemCount: cartNotifier.storeItems.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(cartNotifier.storeItems[index].name),
-              leading: Image.network(
-                cartNotifier.storeItems[index].imageURL,
-                height: 30,
-                width: 30,
-              ),
-              trailing: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.remove_circle,
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.7,
+          child: ListView.builder(
+            itemCount: cartNotifier.storeItems.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(cartNotifier.storeItems[index].name),
+                leading: Image.network(
+                  cartNotifier.storeItems[index].imageURL,
+                  height: 30,
+                  width: 30,
                 ),
+                trailing: IconButton(
+                  onPressed: () => context
+                      .read<CartNotifier>()
+                      .remove(cartNotifier.storeItems[index]),
+                  icon: const Icon(
+                    Icons.remove_circle,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.2,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "\$${cartNotifier.totalPrice}",
+                style: Theme.of(context).textTheme.headline1,
               ),
-            );
-          },
+              const SizedBox(
+                width: 10,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Order placed SuccessFully"),
+                      ),
+                    );
+                  },
+                  child: const Text("BUY"))
+            ],
+          ),
         )
       ],
     );
