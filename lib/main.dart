@@ -1,6 +1,10 @@
-import 'package:blog_application/blog_post.dart';
-import 'package:blog_application/home_page.dart';
-import 'package:blog_application/user.dart';
+import 'package:blog_application/models/blog_post.dart';
+import 'package:blog_application/models/cart_notifier.dart';
+import 'package:blog_application/models/store_item.dart';
+import 'package:blog_application/models/user.dart';
+import 'package:blog_application/pages/checkout_page.dart';
+import 'package:blog_application/pages/home_page.dart';
+import 'package:blog_application/pages/store_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -43,6 +47,11 @@ class MyApp extends StatelessWidget {
           initialData: const [],
           lazy: true,
         ),
+        StreamProvider<List<StoreItem>>(
+          create: (context) => storeItems(),
+          initialData: const [],
+          lazy: true,
+        ),
         StreamProvider<User?>(
           create: (context) => FirebaseAuth.instance.authStateChanges(),
           initialData: null,
@@ -63,6 +72,9 @@ class MyApp extends StatelessWidget {
           },
         ),
         Provider<ThemeData>(create: (context) => theme),
+        ChangeNotifierProvider<CartNotifier>(
+          create: (context) => CartNotifier(),
+        ),
       ],
       builder: (context, child) {
         return MaterialApp(
@@ -70,6 +82,10 @@ class MyApp extends StatelessWidget {
           title: "Blog App",
           theme: Provider.of<ThemeData>(context),
           home: const HomePage(),
+          routes: {
+            '/store': (context) => const StorePage(),
+            '/checkout': (context) => const CheckoutPage(),
+          },
         );
       },
     );
@@ -87,5 +103,14 @@ Stream<List<BlogPost>> blogPosts() {
         final lastDate = last.publishedDate;
         return lastDate.compareTo(firstDate);
       });
+  });
+}
+
+Stream<List<StoreItem>> storeItems() {
+  return FirebaseFirestore.instance
+      .collection("store")
+      .snapshots()
+      .map((snapshot) {
+    return snapshot.docs.map((e) => StoreItem.fromJson(e)).toList();
   });
 }

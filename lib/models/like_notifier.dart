@@ -1,4 +1,4 @@
-import 'package:blog_application/blog_post.dart';
+import 'package:blog_application/models/blog_post.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

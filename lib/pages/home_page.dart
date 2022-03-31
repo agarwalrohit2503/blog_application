@@ -1,13 +1,13 @@
-import 'package:blog_application/blog_entry_page.dart';
-import 'package:blog_application/blog_list_tile.dart';
-import 'package:blog_application/blog_scaffold.dart';
-import 'package:blog_application/login_dialog.dart';
-import 'package:blog_application/user.dart';
+import 'package:blog_application/pages/blog_entry_page.dart';
+import 'package:blog_application/common_widgets/blog_list_tile.dart';
+import 'package:blog_application/common_widgets/blog_scaffold.dart';
+import 'package:blog_application/common_widgets/login_dialog.dart';
+import 'package:blog_application/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:blog_application/blog_post.dart';
-import 'package:blog_application/constrained_center.dart';
+import 'package:blog_application/models/blog_post.dart';
+import 'package:blog_application/common_widgets/constrained_center.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

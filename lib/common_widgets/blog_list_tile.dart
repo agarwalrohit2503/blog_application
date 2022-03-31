@@ -1,16 +1,17 @@
-import 'package:blog_application/blog_entry_page.dart';
-import 'package:blog_application/blog_page.dart';
-import 'package:blog_application/blog_post.dart';
-import 'package:blog_application/like_button.dart';
-import 'package:blog_application/like_notifier.dart';
-import 'package:blog_application/user.dart';
+import 'package:blog_application/pages/blog_entry_page.dart';
+
+import 'package:blog_application/models/blog_post.dart';
+import 'package:blog_application/common_widgets/like_button.dart';
+import 'package:blog_application/models/like_notifier.dart';
+import 'package:blog_application/models/user.dart';
+import 'package:blog_application/pages/blog_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class BlogListTile extends StatelessWidget {
   final BlogPost blog;
-  BlogListTile({
+  const BlogListTile({
     Key? key,
     required this.blog,
   }) : super(key: key);

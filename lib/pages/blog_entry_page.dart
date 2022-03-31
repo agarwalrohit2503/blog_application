@@ -1,5 +1,5 @@
-import 'package:blog_application/blog_post.dart';
-import 'package:blog_application/blog_scaffold.dart';
+import 'package:blog_application/models/blog_post.dart';
+import 'package:blog_application/common_widgets/blog_scaffold.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

@@ -1,9 +1,9 @@
-import 'package:blog_application/blog_post.dart';
-import 'package:blog_application/blog_scaffold.dart';
-import 'package:blog_application/constrained_center.dart';
-import 'package:blog_application/like_button.dart';
-import 'package:blog_application/like_notifier.dart';
-import 'package:blog_application/user.dart';
+import 'package:blog_application/models/blog_post.dart';
+import 'package:blog_application/common_widgets/blog_scaffold.dart';
+import 'package:blog_application/common_widgets/constrained_center.dart';
+import 'package:blog_application/common_widgets/like_button.dart';
+import 'package:blog_application/models/like_notifier.dart';
+import 'package:blog_application/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

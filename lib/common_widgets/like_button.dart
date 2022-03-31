@@ -1,5 +1,5 @@
-import 'package:blog_application/like_notifier.dart';
-import 'package:blog_application/user.dart';
+import 'package:blog_application/models/like_notifier.dart';
+import 'package:blog_application/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
